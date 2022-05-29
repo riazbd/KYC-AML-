@@ -39,8 +39,19 @@
                                             <input type="text" class="form-control" id="external-user-id"
                                                 placeholder="" name="external-id">
                                         </div>
+                                        <div class="form-group">
+                                            <label for="kyc-level">Choose Level</label>
+                                            <select class="form-control" id="kyc-level" name="kyc-level" required>
+                                                <option value="" selected>Choose...</option>
+                                                @foreach (Auth::user()->kycLevels()->get() as $kycLevel)
+                                                    <option value="{{$kycLevel->id}}">{{$kycLevel->level_name}}</option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
+                                {{-- {{dd(Auth::user()->kycLevels()->get())}} --}}
 
                             </div>
                         </div>

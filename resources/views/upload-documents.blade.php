@@ -9,19 +9,19 @@
           </div>
 		<div class="mb-3">
 		  <label class="form-label" for="doc-type">Document Type</label>
-		  <select class="form-select" id="doc-type" name="document-type">
-			<option selected>Choose...</option>
+		  <select class="form-select" id="doc-type" name="document-type" required>
+			<option selected value="">Choose...</option>
 			<option value="National Id Card">National Id Card</option>
 			<option value="Passport">Passport</option>
 		  </select>
 		</div>
 		<div class="mb-3">
 		  <label class="form-label" for="front-doc">Front Side</label>
-		  <input type="file" class="form-control" id="front-doc" name="front-side">
+		  <input type="file" class="form-control" id="front-doc" name="front-side" required>
 		</div>
 		<div class="mb-3">
 		  <label class="form-label" for="back-doc">Back Side</label>
-		  <input type="file" class="form-control" id="back-doc" name="back-side">
+		  <input type="file" class="form-control" id="back-doc" name="back-side" required>
 		</div>
 
 		<button type="submit" class="btn btn-info">Upload</button>

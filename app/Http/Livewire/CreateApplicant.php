@@ -36,6 +36,8 @@ class CreateApplicant extends Component
             $applicant->applicant_extrnal_unique_id = $request->input('external-id');
         }
 
+        $applicant->kyc_level_id = $request->input('kyc-level');
+
         $applicant->save();
         $applicantProfile->applicant_id = $applicant->id;
         $applicantProfile->save();

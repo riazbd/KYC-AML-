@@ -20,4 +20,9 @@ class Applicant extends Model
         return $this->hasOne(ApplicantsProfile::class);
     }
 
+    public function kycLevel()
+    {
+        return $this->belongsTo(KycLevel::class);
+    }
+
 }

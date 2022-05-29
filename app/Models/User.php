@@ -45,4 +45,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Applicant::class);
     }
+
+    public function kycLevels()
+    {
+        return $this->hasMany(KycLevel::class);
+    }
 }

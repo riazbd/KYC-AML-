@@ -41,6 +41,26 @@
                 </a>
             </li>
 
+            <li class="nav-item pb-2">
+                <a class="nav-link {{ Route::currentRouteName() == 'integrations-panel' ? 'active' : '' }}"
+                    href="{{ route('integrations-panel') }}">
+                    <div class="me-2">
+                        <i class="fa-solid fa-bezier-curve"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Integrations</span>
+                </a>
+            </li>
+
+            <li class="nav-item pb-2">
+                <a class="nav-link {{ Route::currentRouteName() == 'settings-panel' ? 'active' : '' }}"
+                    href="{{ route('settings-panel') }}">
+                    <div class="me-2">
+                        <i class="fa-solid fa-gear"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Settings</span>
+                </a>
+            </li>
+
 
             {{-- <li class="nav-item mt-2">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Laravel Examples</h6>

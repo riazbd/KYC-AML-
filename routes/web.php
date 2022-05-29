@@ -12,6 +12,7 @@ use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Applicants;
 use App\Http\Livewire\Billing;
 use App\Http\Livewire\CreateApplicant;
+use App\Http\Livewire\Integrations;
 // use App\Http\Livewire\CreateApplicant\CreateApplicant;
 use App\Http\Livewire\Profile;
 use App\Http\Livewire\Tables;
@@ -22,6 +23,7 @@ use App\Http\Livewire\Rtl;
 use App\Http\Livewire\LaravelExamples\UserProfile;
 use App\Http\Livewire\LaravelExamples\UserManagement;
 use App\Http\Livewire\ReviewPanel;
+use App\Http\Livewire\Settings;
 use App\Http\Livewire\UploadDocuments;
 use Illuminate\Http\Request;
 
@@ -62,6 +64,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/applicants/{id}', ApplicantProfile::class)->name('ApplicantsPage');
     Route::get('/applicants/givedocs/{id}', UploadDocuments::class)->name('uploadDocuments');
     Route::get('/applicant/review', ReviewPanel::class)->name('review-panel');
+    Route::get('/applicant/settings', Settings::class)->name('settings-panel');
+    Route::get('/applicant/integrations', Integrations::class)->name('integrations-panel');
     // put
     Route::put('/edit-applicant-info/{id}', [CreateApplicant::class, 'editApplicant'])->name('ApplicantEdit');
     Route::put('/edit-applicant-profile/{id}', [ApplicantProfile::class, 'editProfile'])->name('edit-profile');
