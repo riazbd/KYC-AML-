@@ -102,7 +102,7 @@
 
     <link id="pagestyle" href="../assets/css/soft-ui-dashboard.css" rel="stylesheet" />
 
-    <link id="pagestyle" href="../css/app.css" rel="stylesheet" />
+    {{-- <link id="pagestyle" href="../css/app.css" rel="stylesheet" /> --}}
 
     <!-- Alpine -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>

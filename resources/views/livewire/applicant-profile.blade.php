@@ -204,17 +204,40 @@
                                     aria-labelledby="headingApprove" data-mdb-parent="#accordionManualApprove">
                                     <div class="accordion-body">
                                         <div class="w-100">
-                                            <h5>{{App\Models\Applicant::where('applicant_unique_id', request('id'))->first()->applicantsProfile()->first()->applicantsDocuments()->count() > 0 ? App\Models\Applicant::where('applicant_unique_id', request('id'))->first()->applicantsProfile()->first()->applicantsDocuments()->latest('created_at')->first()->id_type : ''}}</h3>
-                                            <div class="w-100 mt-5">
-                                                <p>Front</p>
-                                                <img src="{{ asset(App\Models\Applicant::where('applicant_unique_id', request('id'))->first()->applicantsProfile()->first()->applicantsDocuments()->count() > 0 ? 'storage/'.App\Models\Applicant::where('applicant_unique_id', request('id'))->first()->applicantsProfile()->first()->applicantsDocuments()->latest('created_at')->first()->front_path : 'storage/public/files/no_id_front.png') }}" alt="front-doc" class="w-100">
-                                            </div>
-                                            <div class="w-100 mt-5">
-                                                <p>Back</p>
-                                                <img src="{{ asset(App\Models\Applicant::where('applicant_unique_id', request('id'))->first()->applicantsProfile()->first()->applicantsDocuments()->count() > 0 ? 'storage/'.App\Models\Applicant::where('applicant_unique_id', request('id'))->first()->applicantsProfile()->first()->applicantsDocuments()->latest('created_at')->first()->back_path : 'storage/public/files/no_id_front.png') }}" alt="back-doc" class="w-100">
-                                            </div>
+                                            @if (App\Models\Applicant::where('applicant_unique_id', request('id'))->first()->applicantsProfile()->first()->applicantsDocuments()->count() > 0)
+                                                @foreach ( App\Models\Applicant::where('applicant_unique_id', request('id'))->first()->applicantsProfile()->first()->applicantsDocuments()->get() as $key=>$doc )
+                                                    <h5 class="mt-5">{{$doc->id_type}}</h3>
+                                                    <div class="w-100 mt-5">
+                                                        @if ($doc->id_type != 'Selfie')
+                                                            <p>Front</p>
+                                                        @endif
+
+                                                        <img src="{{ asset('storage/'.$doc->front_path) }}" alt="{{ $doc->id_type == 'Selfie' ? 'Selfie' : 'front-doc'}}" class="w-100">
+                                                    </div>
+                                                    @if ($doc->back_path != null)
+                                                        <div class="w-100 mt-5">
+                                                            <p>Back</p>
+                                                            <img src="{{ asset('storage/'.$doc->back_path) }}" alt="back-doc" class="w-100">
+                                                        </div>
+                                                    @endif
+
+                                                @endforeach
+                                            @endif
+
+                                            @if (App\Models\Applicant::where('applicant_unique_id', request('id'))->first()->applicantsProfile()->first()->applicantsDocuments()->count() < 1)
+                                                <div class="w-100 mt-5">
+                                                    <p>Front</p>
+                                                    <img src="{{ asset('storage/public/files/no_id_front.png') }}" alt="front-doc" class="w-100">
+                                                </div>
+                                                <div class="w-100 mt-5">
+                                                    <p>Back</p>
+                                                    <img src="{{ asset('storage/public/files/no_id_front.png') }}" alt="back-doc" class="w-100">
+                                                </div>
+                                            @endif
+
                                         </div>
-                                        <div class="d-flex justify-content-around mt-4">
+                                        <hr class="my-5">
+                                        <div class="d-flex justify-content-around mt-5">
                                             <div class="w-100">
                                                 <form action="{{ route('approve-document', ['id' => request('id') ])}}" method="POST">
                                                     @csrf
@@ -232,7 +255,7 @@
                                             </div>
 
                                         </div>
-                                        <div>
+                                        <div class="mt-4">
                                             @if (App\Models\Applicant::where('applicant_unique_id', request('id'))->first()->applicantsProfile()->first()->applicantsDocuments()->count() < 1)
                                                 <p>Please add documents to validate...</p>
                                             @endif

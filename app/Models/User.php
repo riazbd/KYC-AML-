@@ -50,4 +50,24 @@ class User extends Authenticatable
     {
         return $this->hasMany(KycLevel::class);
     }
+
+    public function userProfile()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
+
+    public function accountDetail()
+    {
+        return $this->hasOne(AccountDetail::class);
+    }
+
+    public function twilio()
+    {
+        return $this->hasOne(TwilioIntegration::class);
+    }
+
+    public function webHooks()
+    {
+        return $this->hasMany(WebHook::class);
+    }
 }

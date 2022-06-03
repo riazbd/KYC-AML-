@@ -16,15 +16,15 @@ class CreateApplicantsDocumentsTable extends Migration
         Schema::create('applicants_documents', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('applicants_profile_id');
-            $table->string('first_name')->default('SPECIMEN');
-            $table->string('middle_name')->default('SPECIMEN');
-            $table->string('last_name')->default('SPECIMEN');
+            $table->string('first_name')->default('SPECIMEN')->nullable();
+            $table->string('middle_name')->default('SPECIMEN')->nullable();
+            $table->string('last_name')->default('SPECIMEN')->nullable();
             $table->string('id_type')->nullable();
-            $table->string('front_path');
-            $table->string('back_path');
-            $table->string('doc_no')->default('SPECIMEN');
+            $table->string('front_path')->nullable();
+            $table->string('back_path')->nullable();
+            $table->string('doc_no')->default('SPECIMEN')->nullable();
             $table->string('issue_date')->nullable();
-            $table->string('date_of_birth')->default('SPECIMEN');
+            $table->string('date_of_birth')->default('SPECIMEN')->nullable();
             $table->string('valid_until')->nullable();
             $table->timestamps();
             $table->foreign('applicants_profile_id')

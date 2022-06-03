@@ -32,7 +32,7 @@
                               <thead>
                                 <tr>
                                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Documents</th>
+                                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Steps</th>
                                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Active Status</th>
                                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Document Status</th>
                                   <th class="text-secondary opacity-7"></th>
@@ -45,22 +45,28 @@
                                     <td>
                                       <a href="/applicants/{{$applicant->applicant_unique_id}}">
                                           <div>
-                                              <p class="text-decoration-underline">ID: <br>
-                                                  {{$applicant->applicant_unique_id}}
+                                              <p class="text-decoration-underline"><span class="text-bold">ID: </span>
+                                                {{$applicant->applicant_unique_id}}
                                               </p>
+                                              <p class=""><span class="text-bold">Name: </span>
+                                                {{$applicant->applicantsProfile()->first()->first_name . ' '. $applicant->applicantsProfile()->first()->last_name}}
+                                            </p>
                                           </div>
                                           {{-- <div>
                                               France
                                           </div> --}}
                                           <div>
-                                              Created at: {{$applicant->created_at}}
+                                              <small>Created at: {{$applicant->created_at}}</small>
                                           </div>
                                       </a>
                                     </td>
                                     <td>
                                         @if ($applicant->applicantsProfile()->first()->applicantsDocuments()->count() > 0)
-                                            <p class="text-xs font-weight-bold mb-0">{{$applicant->applicantsProfile()->first()->applicantsDocuments()->latest('created_at')->first()->id_type}}
-                                            </p>
+                                            @foreach ($applicant->applicantsProfile()->first()->applicantsDocuments()->get() as $doc )
+                                                <p class="text-xs font-weight-bold mb-0">{{$doc->id_type}},
+                                                </p>
+                                            @endforeach
+
                                         @else
                                             <p class="text-xs font-weight-bold mb-0">None</p>
                                         @endif
@@ -70,11 +76,11 @@
                                     </td>
                                     <td class="align-middle text-center text-sm">
                                     @if ($applicant->status == 1)
-                                    <button class="badge badge-pill bg-gradient-success border-0">Online</button>
+                                    <p class="badge badge-pill bg-gradient-success border-0">Online</p>
                                     @endif
 
                                     @if ($applicant->status == 0)
-                                    <button class="badge badge-pill bg-gradient-danger border-0">Offline</button>
+                                    <p class="badge badge-pill bg-gradient-danger border-0">Offline</p>
                                     @endif
 
                                     </td>
