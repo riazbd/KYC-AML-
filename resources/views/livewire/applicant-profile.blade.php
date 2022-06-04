@@ -73,6 +73,18 @@
                                                         placeholder="Email" name="email" value="{{App\Models\Applicant::where('applicant_unique_id', request('id'))->count() > 0 ? App\Models\Applicant::where('applicant_unique_id', request('id'))->first()->email : ''}}">
                                                 </div>
                                             </div>
+                                            <div class="row">
+                                                <div class="form-group col-6">
+                                                    <label for="kyc-level">KYC Level</label>
+                                                    <select class="form-control" id="kyc-level" name="kyc-level" required>
+                                                        <option value="" selected>Choose...</option>
+                                                        @foreach (Auth::user()->kycLevels()->get() as $kycLevel)
+                                                            <option value="{{$kycLevel->id}}" {{ $kycLevel->id == App\Models\Applicant::where('applicant_unique_id', request('id'))->first()->kyc_level_id ? 'selected' : '' }}>{{$kycLevel->level_name}}</option>
+                                                        @endforeach
+
+                                                    </select>
+                                                </div>
+                                            </div>
                                             <div class="row mt-4">
                                                 <button type="submit" class="btn btn-info">Save Info</button>
                                             </div>

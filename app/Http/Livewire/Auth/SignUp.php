@@ -7,6 +7,7 @@ use App\Models\TwilioIntegration;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\UserProfile;
+use App\Models\KycLevel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -42,6 +43,11 @@ class SignUp extends Component
         $userProfile = New UserProfile;
         $accountDetail = New AccountDetail;
         $twilioIntegration = New TwilioIntegration;
+        $kycLevel = New KycLevel;
+
+        $kycLevel->user_id = Auth::user()->id;
+        $kycLevel->level_name = 'basic-kyc';
+        $kycLevel->id_types = ["NID", "Passport", "email", "Selfie"];
 
         $userProfile->user_id = Auth::user()->id;
 
@@ -53,7 +59,7 @@ class SignUp extends Component
         $twilioIntegration->auth_token = '';
         $twilioIntegration->from_number = '';
 
-
+        $kycLevel->save();
         $userProfile->save();
         $accountDetail->save();
         $twilioIntegration->save();

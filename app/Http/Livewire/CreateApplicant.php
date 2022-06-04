@@ -51,6 +51,7 @@ class CreateApplicant extends Component
     public function editApplicant (Request $request, $id){
         $applicant = Applicant::where('applicant_unique_id', $id)->get();
         $applicant->first()->email = $request->input('email');
+        $applicant->first()->kyc_level_id = $request->input('kyc-level');
         $applicant->first()->save();
 
         return redirect()->back();
